@@ -19,12 +19,7 @@ namespace log4net.ElasticSearch
                 action(item);
             }
         }
-
-        public static string With(this string self, params object[] args)
-        {
-            return string.Format(self, args);
-        }
-
+        
         public static IEnumerable<KeyValuePair<string, string>> Properties(this LoggingEvent self)
         {
             return self.GetProperties().AsPairs();

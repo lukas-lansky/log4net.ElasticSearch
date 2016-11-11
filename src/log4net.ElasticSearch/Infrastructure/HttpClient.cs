@@ -33,8 +33,7 @@ namespace log4net.ElasticSearch.Infrastructure
 
                 if (httpResponse.StatusCode != HttpStatusCode.Created)
                 {
-                    throw new WebException(
-                        "Failed to post {0} to {1}.".With(item.GetType().Name, uri));
+                    throw new WebException($"Failed to post {item.GetType().Name} to {uri}.");
                 }
             }
         }
@@ -71,8 +70,7 @@ namespace log4net.ElasticSearch.Infrastructure
 
                 if (httpResponse.StatusCode != HttpStatusCode.Created && httpResponse.StatusCode != HttpStatusCode.OK)
                 {
-                    throw new WebException(
-                        "Failed to post {0} to {1}.".With(postBody.ToString(), uri));
+                    throw new WebException($"Failed to post {postBody} to {uri}.");
                 }
             }
         }

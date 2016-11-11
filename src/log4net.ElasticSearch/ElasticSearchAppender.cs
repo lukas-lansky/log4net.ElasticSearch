@@ -45,7 +45,7 @@ namespace log4net.ElasticSearch
 
             // Artificially add the buffer size to the connection string so it can be parsed
             // later to decide if we should send a _bulk API call
-            ConnectionString += string.Format(";BufferSize={0}", BufferSize);
+            ConnectionString += $";BufferSize={BufferSize}";
             repository = CreateRepository(ConnectionString);            
         }
 
@@ -94,7 +94,7 @@ namespace log4net.ElasticSearch
             }
             catch (Exception ex)
             {
-                HandleError("Failed to addd logEvents to {0} in SendBufferCallback".With(repository.GetType().Name), ex);
+                HandleError($"Failed to addd logEvents to {repository.GetType().Name} in SendBufferCallback", ex);
             }
             finally
             {
@@ -111,12 +111,12 @@ namespace log4net.ElasticSearch
 
         void HandleError(string message)
         {
-            ErrorHandler.Error("{0} [{1}]: {2}.".With(AppenderType, Name, message));
+            ErrorHandler.Error($"{AppenderType} [{Name}]: {message}.");
         }
 
         void HandleError(string message, Exception ex)
         {
-            ErrorHandler.Error("{0} [{1}]: {2}.".With(AppenderType, Name, message), ex, ErrorCode.GenericFailure);
+            ErrorHandler.Error($"{AppenderType} [{Name}]: {message}.", ex, ErrorCode.GenericFailure);
         }
 
         static void Validate(string connectionString)
